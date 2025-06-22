@@ -1,4 +1,9 @@
-package ru.aikrq.next.presentation.dialog
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
+package ru.aikrq.next.presentation.component
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
@@ -27,7 +32,8 @@ fun AlertDialog(
             }
         },
         properties = DialogProperties(
-            dismissOnBackPress = false, dismissOnClickOutside = false
+            dismissOnBackPress = false,
+            dismissOnClickOutside = false
         )
     )
 }

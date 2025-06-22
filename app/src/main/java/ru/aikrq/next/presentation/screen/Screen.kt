@@ -1,3 +1,8 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.presentation.screen
 
 import androidx.compose.material.icons.Icons
@@ -13,6 +18,9 @@ sealed interface MainRoute {
     val icon: IconResource
     val label: String
 }
+
+@Serializable
+data object Permission : NavKey
 
 @Serializable
 data object Main : NavKey

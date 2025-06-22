@@ -1,3 +1,8 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.presentation.component
 
 import androidx.compose.foundation.background
@@ -23,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,31 +38,27 @@ import ru.aikrq.next.model.projects.ProjectFilesLocations
 import ru.aikrq.next.presentation.theme.ADAPTIVE_BORDER_COLOR
 import ru.aikrq.next.presentation.theme.ADAPTIVE_SURFACE_CONTAINER
 import ru.aikrq.next.presentation.theme.ON_SURFACE_VARIANT_ALPHA
-import ru.aikrq.next.presentation.theme.onDark
 import java.io.File
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ProjectItem(
-    configModel: ProjectConfigModel,
+    model: ProjectConfigModel,
     locations: ProjectFilesLocations,
-    shape: Shape,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val providerPath = remember { context.packageName + ".provider" }
+    val providerPath = context.packageName + ".provider"
     val iconUri = remember(providerPath) {
         FileProvider.getUriForFile(
             context, providerPath, File(locations.resources.iconsFolder, "icon.png")
         )
     }
-    val model = remember(configModel) { configModel }
 
     Box(
         modifier = modifier
-            .padding(end = 16.dp, start = 16.dp)
-            .clip(shape)
+            .clip(RoundedCornerShape(4.dp))
             .background(MaterialTheme.colorScheme.surface)
             .clickable { onClick() }) {
         Row(

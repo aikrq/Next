@@ -1,3 +1,8 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -28,7 +33,7 @@ fun NextTheme(
     darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
 ) {
     DynamicMaterialExpressiveTheme(
-        seedColor = Color(0xFFFFFFFF),
+        seedColor = Color(0xFFFE6262),
         motionScheme = MotionScheme.expressive(),
         isDark = darkTheme,
         animate = true,

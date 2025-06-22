@@ -1,3 +1,8 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.presentation.screen.projects
 
 import android.os.Environment
@@ -22,7 +27,7 @@ class ProjectsViewModel : ViewModel() {
         sketchwareFolder = File(Environment.getExternalStorageDirectory(), ".sketchware")
     )
 
-    fun loadProjects() {
+    init {
         viewModelScope.launch {
             _uiState.value = ProjectsUiState.Success(
                 projects = manager.projectsManager.getProjects()
