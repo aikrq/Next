@@ -1,6 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.presentation.screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +16,8 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,8 +27,12 @@ import ru.aikrq.next.presentation.component.StoreSectionTitle
 fun StoreScreen(
     padding: PaddingValues
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
             .padding(padding)
             .padding(vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
