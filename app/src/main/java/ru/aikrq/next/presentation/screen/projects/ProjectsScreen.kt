@@ -42,7 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import ru.aikrq.next.model.projects.SketchwareProject
 import ru.aikrq.next.presentation.component.ProjectItem
@@ -52,8 +52,11 @@ import ru.aikrq.next.presentation.theme.ADAPTIVE_SURFACE_CONTAINER
 @SuppressLint("NewApi")
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalPermissionsApi::class)
 @Composable
-fun ProjectsScreen(padding: PaddingValues) {
-    val viewModel: ProjectsViewModel = viewModel()
+fun ProjectsScreen(
+    padding: PaddingValues,
+    onProjectClick: (String) -> Unit,
+) {
+    val viewModel = hiltViewModel<ProjectsViewModel>()
     val uiState by viewModel.uiState.collectAsState()
 
     Column(

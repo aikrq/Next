@@ -16,6 +16,8 @@ import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
+import dagger.hilt.android.AndroidEntryPoint
 import ru.aikrq.next.core.manager.PermissionManager
 import ru.aikrq.next.presentation.screen.Main
 import ru.aikrq.next.presentation.screen.MainScreen
@@ -25,6 +27,7 @@ import ru.aikrq.next.presentation.screen.Settings
 import ru.aikrq.next.presentation.screen.SettingsScreen
 import ru.aikrq.next.presentation.theme.NextTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     lateinit var permissionManager: PermissionManager
 
