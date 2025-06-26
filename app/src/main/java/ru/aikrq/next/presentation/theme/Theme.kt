@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import com.materialkolor.DynamicMaterialExpressiveTheme
 
 val ON_SURFACE_VARIANT_ALPHA
-    @Composable get() = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f)
+    @Composable get() = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
 
 val ADAPTIVE_SURFACE_CONTAINER
     @Composable get() = MaterialTheme.colorScheme.surfaceContainer onDark MaterialTheme.colorScheme.surfaceContainerLow
