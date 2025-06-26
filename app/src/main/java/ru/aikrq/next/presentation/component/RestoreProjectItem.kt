@@ -1,21 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.presentation.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
@@ -34,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import ru.aikrq.next.presentation.theme.ADAPTIVE_SURFACE_CONTAINER
 import ru.aikrq.next.presentation.theme.NextTheme
 import ru.aikrq.next.presentation.theme.ON_SURFACE_VARIANT_ALPHA
-import ru.aikrq.next.presentation.theme.onDark
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
