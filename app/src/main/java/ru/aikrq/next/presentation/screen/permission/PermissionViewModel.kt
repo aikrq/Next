@@ -5,14 +5,19 @@
 
 package ru.aikrq.next.presentation.screen.permission
 
-import android.app.Application
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.aikrq.next.core.manager.PermissionManager
+import javax.inject.Inject
 
-class PermissionViewModel(application: Application) : AndroidViewModel(application) {
-    val permissions = PermissionManager(application)
+@HiltViewModel
+class PermissionViewModel @Inject constructor(@ApplicationContext context: Context) :
+    ViewModel() {
+    val permissions = PermissionManager(context)
     val state = permissions.state
 
     fun onPermissionChange() {

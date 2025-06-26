@@ -50,9 +50,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.aikrq.next.core.manager.PermissionManager.Companion.REQUIRED_PERMISSIONS
 import ru.aikrq.next.presentation.theme.ADAPTIVE_BORDER_COLOR
 import ru.aikrq.next.presentation.theme.ADAPTIVE_SURFACE_CONTAINER
@@ -62,7 +62,7 @@ import ru.aikrq.next.presentation.theme.ON_SURFACE_VARIANT_ALPHA
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PermissionScreen(onPermissionGiven: () -> Unit) {
-    val viewModel: PermissionViewModel = viewModel()
+    val viewModel = hiltViewModel<PermissionViewModel>()
     val state = viewModel.state.collectAsState()
     val lifecycleOwner = LocalLifecycleOwner.current
     val lifecycleState by lifecycleOwner.lifecycle.currentStateFlow.collectAsState()
