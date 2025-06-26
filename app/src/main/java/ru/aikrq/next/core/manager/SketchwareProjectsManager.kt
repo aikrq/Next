@@ -1,3 +1,8 @@
+/*******************************************************************************
+ * Copyright (c) 2025. Aikrq
+ * All rights reserved.
+ ******************************************************************************/
+
 package ru.aikrq.next.core.manager
 
 import ru.aikrq.next.core.util.SketchwareProjectsUtil
@@ -7,16 +12,10 @@ import java.io.File
 
 class SketchwareProjectsManager(private val sketchwareFolder: File) : ProjectsManager {
     /**
-     * @param folderPath - path to sketchware folder.
-     */
-    constructor(folderPath: String) : this(File(folderPath))
-
-    /**
      * Gets projects.
      * @return List of [SketchwareProject].
      */
     override suspend fun getProjects() = SketchwareProjectsUtil.getProjectsList(sketchwareFolder)
-
 
     /**
      * Checks next free id and returns it.
