@@ -43,6 +43,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import ru.aikrq.next.presentation.screen.projects.ProjectsScreen
 import ru.aikrq.next.presentation.theme.ADAPTIVE_BORDER_COLOR
 import ru.aikrq.next.presentation.theme.ADAPTIVE_SURFACE_CONTAINER
+import ru.aikrq.next.presentation.util.materialSharedAxisZ
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
@@ -115,9 +116,12 @@ fun MainScreen(
             }
         }, containerColor = MaterialTheme.colorScheme.surface
     ) { innerPadding ->
+        val transition = materialSharedAxisZ(true)
         NavDisplay(
             backStack = mainBackStack.backStack,
             onBack = { mainBackStack.removeLast() },
+            transitionSpec = { transition },
+            popTransitionSpec = { transition },
             entryProvider = entryProvider {
                 entry<Projects> { ProjectsScreen(innerPadding) }
                 entry<Store> { StoreScreen(innerPadding) }

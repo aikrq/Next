@@ -26,6 +26,7 @@ import ru.aikrq.next.presentation.screen.PermissionScreen
 import ru.aikrq.next.presentation.screen.Settings
 import ru.aikrq.next.presentation.screen.SettingsScreen
 import ru.aikrq.next.presentation.theme.NextTheme
+import ru.aikrq.next.presentation.util.materialSharedAxisX
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -55,6 +56,16 @@ class MainActivity : ComponentActivity() {
                 NavDisplay(
                     backStack = backStack,
                     onBack = { backStack.removeLastOrNull() },
+                    transitionSpec = {
+                        materialSharedAxisX(
+                            initialOffsetX = { it / 5 },
+                            targetOffsetX = { -it / 5 })
+                    },
+                    popTransitionSpec = {
+                        materialSharedAxisX(
+                            initialOffsetX = { -it / 5 },
+                            targetOffsetX = { it / 5 })
+                    },
                     entryProvider = entryProvider {
                         entry<Main> {
                             MainScreen(
