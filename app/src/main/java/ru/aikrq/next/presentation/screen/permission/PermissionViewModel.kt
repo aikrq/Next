@@ -3,7 +3,7 @@
  * All rights reserved.
  ******************************************************************************/
 
-package ru.aikrq.next.presentation.screen
+package ru.aikrq.next.presentation.screen.permission
 
 import android.app.Application
 import android.os.Build

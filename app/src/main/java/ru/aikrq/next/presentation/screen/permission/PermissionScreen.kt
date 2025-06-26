@@ -3,7 +3,7 @@
  * All rights reserved.
  ******************************************************************************/
 
-package ru.aikrq.next.presentation.screen
+package ru.aikrq.next.presentation.screen.permission
 
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -54,6 +54,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.aikrq.next.core.manager.PermissionManager.Companion.REQUIRED_PERMISSIONS
+import ru.aikrq.next.presentation.theme.ADAPTIVE_BORDER_COLOR
 import ru.aikrq.next.presentation.theme.ADAPTIVE_SURFACE_CONTAINER
 import ru.aikrq.next.presentation.theme.NextTheme
 import ru.aikrq.next.presentation.theme.ON_SURFACE_VARIANT_ALPHA
@@ -172,7 +173,7 @@ fun PermissionScreen(onPermissionGiven: () -> Unit) {
 
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 16.dp),
-            color = MaterialTheme.colorScheme.surfaceContainerHighest
+            color = ADAPTIVE_BORDER_COLOR
         )
 
         @Composable
