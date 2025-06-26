@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExpandedFullScreenSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -27,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopSearchBar
 import androidx.compose.material3.rememberSearchBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -49,11 +52,13 @@ import ru.aikrq.next.presentation.util.materialSharedAxisZ
 @Composable
 fun MainScreen(
     onSettingsClick: () -> Unit,
+    onProjectClick: (String) -> Unit,
 ) {
     val textFieldState = rememberTextFieldState()
     var expanded by rememberSaveable { mutableStateOf(false) }
     val mainBackStack = remember { MainBackStack<Any>(Projects) }
     val searchBarState = rememberSearchBarState()
+    rememberScrollState()
 
     val inputField = @Composable {
         SearchBarDefaults.InputField(
@@ -75,47 +80,44 @@ fun MainScreen(
         )
     }
 
-    Scaffold(
-        topBar = {
-            TopSearchBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
-                inputField = inputField,
-                state = searchBarState
-            )
-        }, bottomBar = {
-            Column {
-                HorizontalDivider(
-                    color = ADAPTIVE_BORDER_COLOR
-                )
-                NavigationBar(
-                    containerColor = ADAPTIVE_SURFACE_CONTAINER
-                ) {
-                    MAIN_ROUTES.forEach { route ->
-                        val isSelected = route == mainBackStack.topLevelKey
+    Scaffold(topBar = {
+        TopSearchBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            inputField = inputField,
+            state = searchBarState
+        )
+        ExpandedFullScreenSearchBar(
+            state = searchBarState, inputField = inputField
+        ) { }
+    }, bottomBar = {
+        Column {
+            HorizontalDivider(color = ADAPTIVE_BORDER_COLOR)
+            NavigationBar(containerColor = ADAPTIVE_SURFACE_CONTAINER) {
+                MAIN_ROUTES.forEach { route ->
+                    val isSelected = route == mainBackStack.topLevelKey
 
-                        NavigationBarItem(
-                            colors = NavigationBarItemDefaults.colors(
-                                selectedIconColor = MaterialTheme.colorScheme.onSurface,
-                                selectedTextColor = MaterialTheme.colorScheme.onSurface,
-                                indicatorColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                            ), selected = isSelected, onClick = {
-                                mainBackStack.addTopLevel(route)
-                            }, icon = {
-                                Icon(
-                                    modifier = Modifier.size(24.dp),
-                                    painter = route.icon.asPainter(),
-                                    contentDescription = null
-                                )
-                            }, label = {
-                                Text(route.label)
-                            })
-                    }
+                    NavigationBarItem(
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = MaterialTheme.colorScheme.onSurface,
+                            selectedTextColor = MaterialTheme.colorScheme.onSurface,
+                            indicatorColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                        ), selected = isSelected, onClick = {
+                            mainBackStack.addTopLevel(route)
+                        }, icon = {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                painter = route.icon.asPainter(),
+                                contentDescription = null
+                            )
+                        }, label = {
+                            Text(route.label)
+                        })
                 }
             }
-        }, containerColor = MaterialTheme.colorScheme.surface
-    ) { innerPadding ->
+        }
+    }) { innerPadding ->
         val transition = materialSharedAxisZ(true)
         NavDisplay(
             backStack = mainBackStack.backStack,
@@ -123,12 +125,17 @@ fun MainScreen(
             transitionSpec = { transition },
             popTransitionSpec = { transition },
             entryProvider = entryProvider {
-                entry<Projects> { ProjectsScreen(innerPadding) }
+                entry<Projects> {
+                    ProjectsScreen(
+                        padding = innerPadding, onProjectClick = onProjectClick
+                    )
+                }
                 entry<Store> { StoreScreen(innerPadding) }
             })
     }
 }
 
+@Stable
 class MainBackStack<T : Any>(startKey: T) {
     private var topLevelStacks: LinkedHashMap<T, SnapshotStateList<T>> = linkedMapOf(
         startKey to mutableStateListOf(startKey)

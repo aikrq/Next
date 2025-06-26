@@ -46,7 +46,7 @@ fun ProjectItem(
     model: ProjectConfigModel,
     locations: ProjectFilesLocations,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
     val providerPath = context.packageName + ".provider"
@@ -60,7 +60,7 @@ fun ProjectItem(
         modifier = modifier
             .clip(RoundedCornerShape(4.dp))
             .background(MaterialTheme.colorScheme.surface)
-            .clickable { onClick() }) {
+            .clickable { onClick(model.projectId) }) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()

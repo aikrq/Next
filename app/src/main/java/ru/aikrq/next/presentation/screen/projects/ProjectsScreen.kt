@@ -85,9 +85,24 @@ fun ProjectsScreen(
                 ) {
                     Text(
                         text = "Projects",
-                        modifier = Modifier.weight(1f),
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium)
                     )
+                    when (uiState) {
+                        is ProjectsUiState.Success -> {
+                            Text(
+                                text = (uiState as ProjectsUiState.Success).projects.size.toString(),
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier
+                                    .padding(start = 4.dp, top = 4.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(MaterialTheme.colorScheme.surface)
+                                    .padding(horizontal = 4.dp, vertical = 2.dp)
+                            )
+                        }
+
+                        else -> {}
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
                     Icon(
                         modifier = Modifier
                             .size(48.dp)
@@ -100,14 +115,18 @@ fun ProjectsScreen(
                 when (uiState) {
                     is ProjectsUiState.Loading -> {
                         Box(
-                            modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
                         ) {
                             LoadingIndicator()
                         }
                     }
 
                     is ProjectsUiState.Success -> {
-                        ProjectList(ImmutableList((uiState as ProjectsUiState.Success).projects))
+                        ProjectList(
+                            projects = ImmutableList((uiState as ProjectsUiState.Success).projects),
+                            onProjectClick = onProjectClick
+                        )
                     }
                 }
             }
@@ -121,7 +140,10 @@ data class ImmutableList<T>(
 ) : List<T> by wrapped
 
 @Composable
-fun ProjectList(projects: ImmutableList<SketchwareProject>) {
+fun ProjectList(
+    projects: ImmutableList<SketchwareProject>,
+    onProjectClick: (String) -> Unit,
+) {
     val lazyListState = rememberLazyListState()
 
     LazyColumn(
@@ -133,8 +155,8 @@ fun ProjectList(projects: ImmutableList<SketchwareProject>) {
         itemsIndexed(items = projects) { index, project ->
             ProjectItem(
                 model = project.getConfig(),
-                locations = project.locations
-            )
+                locations = project.locations,
+                onClick = { onProjectClick(it) })
 
             if (index != projects.size - 1) {
                 Spacer(Modifier.height(4.dp))
